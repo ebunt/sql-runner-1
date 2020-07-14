@@ -47,8 +47,6 @@ func review(statuses []TargetStatus) (int, string) {
 	}
 }
 
-
-
 // Don't use a template here as executing it could fail
 func getSuccessMessage(queryCount int, targetCount int) string {
 	return fmt.Sprintf("SUCCESS: %d queries executed against %d targets", queryCount, targetCount)

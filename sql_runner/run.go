@@ -13,10 +13,10 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"log"
 	"strings"
-	"bytes"
 )
 
 const (

@@ -14,14 +14,14 @@ package main
 
 import (
 	"crypto/tls"
+	"errors"
 	"github.com/go-pg/pg"
 	"github.com/go-pg/pg/orm"
-	"net"
-	"time"
-	"log"
 	"github.com/olekukonko/tablewriter"
+	"log"
+	"net"
 	"os"
-	"errors"
+	"time"
 )
 
 // For Redshift queries

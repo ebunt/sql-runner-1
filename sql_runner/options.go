@@ -42,22 +42,22 @@ func (i *CLIVariables) Set(value string) error {
 }
 
 type Options struct {
-	help       bool
-	version    bool
-	playbook   string
-	sqlroot    string
-	fromStep   string
-	dryRun     bool
-	consul     string
-	lock       string
-	softLock   string
-	checkLock  string
-	deleteLock string
-	runQuery   string
-	variables  CLIVariables
-	fillTemplates bool
-	consulOnlyForLock    bool
-	showQueryOutput bool
+	help              bool
+	version           bool
+	playbook          string
+	sqlroot           string
+	fromStep          string
+	dryRun            bool
+	consul            string
+	lock              string
+	softLock          string
+	checkLock         string
+	deleteLock        string
+	runQuery          string
+	variables         CLIVariables
+	fillTemplates     bool
+	consulOnlyForLock bool
+	showQueryOutput   bool
 }
 
 func NewOptions() Options {
