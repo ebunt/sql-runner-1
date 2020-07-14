@@ -30,4 +30,5 @@ coverage.out
 coverage.html
 
 # Vagrant
-.vagrant/
+*.log
+.vagrant

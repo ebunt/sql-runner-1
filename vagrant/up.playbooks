@@ -1,4 +1,3 @@
-oss-playbooks/golang.yml
-oss-playbooks/postgres.yml
+oss-playbooks/golang-1.13.5.yml
+oss-playbooks/postgres-bionic.yml
 oss-playbooks/consul.yml
-oss-playbooks/golang-dep.yml
