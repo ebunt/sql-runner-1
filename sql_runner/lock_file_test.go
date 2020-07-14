@@ -97,12 +97,12 @@ func TestLockUnlockFile_LocalFailure(t *testing.T) {
 func TestInitLockFile_Consul(t *testing.T) {
 	assert := assert.New(t)
 
-	lockFile, err := InitLockFile("dist/lock.lockfile", false, "localhost:8500")
+	lockFile, err := InitLockFile("dist/lock.lockfile", false, "localhost:8502")
 
 	assert.Nil(err)
 	assert.Equal("dist/lock.lockfile", lockFile.Path)
 	assert.False(lockFile.SoftLock)
-	assert.Equal("localhost:8500", lockFile.ConsulAddress)
+	assert.Equal("localhost:8502", lockFile.ConsulAddress)
 	assert.False(lockFile.LockExists())
 }
 
@@ -111,7 +111,7 @@ func TestInitLockFile_Consul(t *testing.T) {
 func TestLockUnlockFile_Consul(t *testing.T) {
 	assert := assert.New(t)
 
-	lockFile, err := InitLockFile("dist/lock.lockfile", false, "localhost:8500")
+	lockFile, err := InitLockFile("dist/lock.lockfile", false, "localhost:8502")
 	assert.Nil(err)
 	assert.False(lockFile.LockExists())
 
@@ -124,7 +124,7 @@ func TestLockUnlockFile_Consul(t *testing.T) {
 	assert.Equal("LockFile is already locked!", err.Error())
 	assert.True(lockFile.LockExists())
 
-	_, err2 := InitLockFile("dist/lock.lockfile", false, "localhost:8500")
+	_, err2 := InitLockFile("dist/lock.lockfile", false, "localhost:8502")
 	assert.NotNil(err2)
 	assert.Equal("dist/lock.lockfile found on start, previous run failed or is ongoing. Cannot start", err2.Error())
 

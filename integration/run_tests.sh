@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2015-2017 Snowplow Analytics Ltd. All rights reserved.
+# Copyright (c) 2015-2020 Snowplow Analytics Ltd. All rights reserved.
 #
 # This program is licensed to you under the Apache License Version 2.0,
 # and you may not use this file except in compliance with the Apache License Version 2.0.
@@ -13,19 +13,17 @@
 
 set -e
 
-
-
 # -----------------------------------------------------------------------------
 #  CONSTANTS
 # -----------------------------------------------------------------------------
 
-root=${TRAVIS_BUILD_DIR}
-bin_path=${root}/dist/output/linux/sql-runner
-consul_server_uri=localhost:8500
-root_key=${root}/integration/resources
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+root=${DIR}/../
+bin_path=${DIR}/../dist/output/${DISTRO}/sql-runner
+consul_server_uri=localhost:8502
+root_key=${DIR}/resources
 assert_counter=0
-
-
 
 # -----------------------------------------------------------------------------
 #  FUNCTIONS & PROCEDURES

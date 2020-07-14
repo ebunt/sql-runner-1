@@ -1,4 +1,4 @@
-.PHONY: all format lint tidy setup-local setup-travis test goveralls integration release release-dry clean
+.PHONY: all format lint tidy setup-reset setup-up setup-down test goveralls integration release release-dry clean
 
 # -----------------------------------------------------------------------------
 #  CONSTANTS
@@ -54,19 +54,17 @@ tidy:
 #  TESTING
 # -----------------------------------------------------------------------------
 
-setup-local:
-ifndef TRAVIS_BUILD_DIR
-	$(error TRAVIS_BUILD_DIR is undefined - this should be set to the current working directory!)
-endif
-	./integration/setup_local.sh
+setup-reset: setup-down setup-up
 
-setup-travis:
-ifndef TRAVIS_BUILD_DIR
-	$(error TRAVIS_BUILD_DIR is undefined - this should be set to the current working directory!)
-endif
-	./integration/setup_travis.sh
+setup-up:
+	docker-compose -f ./integration/docker-compose.yml up -d
+	sleep 2
+	./integration/setup_consul.sh
 
-test:
+setup-down:
+	docker-compose -f ./integration/docker-compose.yml down
+
+test: setup-reset
 	mkdir -p $(coverage_dir)
 	GO111MODULE=on go get -u golang.org/x/tools/cmd/cover
 	GO111MODULE=on go test ./$(src_dir) -tags test -v -covermode=count -coverprofile=$(coverage_out)
@@ -76,7 +74,7 @@ goveralls: test
 	GO111MODULE=on go get -u github.com/mattn/goveralls
 	goveralls -coverprofile=$(coverage_out) -service=travis-ci
 
-integration:
+integration: setup-reset
 	./integration/run_tests.sh
 
 # -----------------------------------------------------------------------------
