@@ -21,14 +21,14 @@ packages:
         suffix : "_linux_amd64"
         type   : "zip"
         binary_paths:
-          - build/output/linux/sql-runner
+          - dist/output/linux/sql-runner
       - prefix : "sql_runner_"
         suffix : "_darwin_amd64"
         type   : "zip"
         binary_paths:
-          - build/output/darwin/sql-runner
+          - dist/output/darwin/sql-runner
       - prefix : "sql_runner_"
         suffix : "_windows_amd64"
         type   : "zip"
         binary_paths:
-          - build/output/windows/sql-runner.exe
+          - dist/output/windows/sql-runner.exe
