@@ -1,4 +1,4 @@
-.PHONY: all format lint tidy test goveralls release release-dry clean
+.PHONY: all format lint tidy setup-local setup-travis test goveralls integration release release-dry clean
 
 # -----------------------------------------------------------------------------
 #  CONSTANTS
@@ -54,6 +54,18 @@ tidy:
 #  TESTING
 # -----------------------------------------------------------------------------
 
+setup-local:
+ifndef TRAVIS_BUILD_DIR
+	$(error TRAVIS_BUILD_DIR is undefined - this should be set to the current working directory!)
+endif
+	./integration/setup_local.sh
+
+setup-travis:
+ifndef TRAVIS_BUILD_DIR
+	$(error TRAVIS_BUILD_DIR is undefined - this should be set to the current working directory!)
+endif
+	./integration/setup_travis.sh
+
 test:
 	mkdir -p $(coverage_dir)
 	GO111MODULE=on go get -u golang.org/x/tools/cmd/cover
@@ -63,6 +75,9 @@ test:
 goveralls: test
 	GO111MODULE=on go get -u github.com/mattn/goveralls
 	goveralls -coverprofile=$(coverage_out) -service=travis-ci
+
+integration:
+	./integration/run_tests.sh
 
 # -----------------------------------------------------------------------------
 #  RELEASE
