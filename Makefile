@@ -64,7 +64,7 @@ setup-up:
 setup-down:
 	docker-compose -f ./integration/docker-compose.yml down
 
-test: setup-reset
+test:
 	mkdir -p $(coverage_dir)
 	GO111MODULE=on go get -u golang.org/x/tools/cmd/cover
 	GO111MODULE=on go test ./$(src_dir) -tags test -v -covermode=count -coverprofile=$(coverage_out)
@@ -74,7 +74,10 @@ goveralls: test
 	GO111MODULE=on go get -u github.com/mattn/goveralls
 	goveralls -coverprofile=$(coverage_out) -service=travis-ci
 
-integration: setup-reset
+integration:
+ifndef DISTRO
+	$(error DISTRO is undefined - this should be set to 'linux' or 'darwin'!)
+endif
 	./integration/run_tests.sh
 
 # -----------------------------------------------------------------------------
